@@ -1,22 +1,14 @@
 {
-  "name": "web-202203-devmatching-webfe-client",
+  "name": "fe-grepp-assignment-2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "serve -s"
+    "start": "serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/grepp/web-202203-DevMatching-webfe-client.git"
-  },
-  "author": "",
+  "keywords": [],
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/grepp/web-202203-DevMatching-webfe-client/issues"
-  },
-  "homepage": "https://github.com/grepp/web-202203-DevMatching-webfe-client#readme",
   "dependencies": {
     "serve": "^13.0.2"
   }
