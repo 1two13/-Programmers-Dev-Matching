@@ -2,25 +2,21 @@ import Table from './Table.js';
 
 class Pagination {
   #data;
-  #sliceData;
 
   constructor(data) {
     this.#data = data;
-    this.#sliceData;
   }
 
   render() {
     // 버튼의 개수
     let maxPageCnt = 7;
-    // 페이지 당 데이터 개수
-    let pagePerCnt = 0;
     // 현재 페이지 번호
     let currentPage = 1;
 
-    this.setPaginationBtns(maxPageCnt, pagePerCnt, currentPage);
+    this.setPaginationButtons(maxPageCnt, currentPage);
   }
 
-  setPaginationBtns = (maxPageCnt, pagePerCnt, currentPage) => {
+  setPaginationButtons = (maxPageCnt, currentPage) => {
     for (let i = 0; i < maxPageCnt; i++) {
       const button = document.createElement('button');
 
@@ -35,16 +31,14 @@ class Pagination {
         button.appendChild(document.createTextNode('>>'));
       } else button.appendChild(document.createTextNode(i));
 
-      button.setAttribute('id', 'paginationButton');
       document.getElementById('pagination').appendChild(button);
       button.addEventListener('click', () => {
         if (i === 0) currentPage = 1;
         else if (i === maxPageCnt - 1) currentPage = maxPageCnt - 2;
         else currentPage = i;
 
-        this.paginationBtnClicked(
+        this.paginationButtonClicked(
           maxPageCnt,
-          pagePerCnt,
           currentPage,
           document.getElementById('pagination').children
         );
@@ -52,7 +46,7 @@ class Pagination {
     }
   };
 
-  paginationBtnClicked = (maxPageCnt, pagePerCnt, currentPage, button) => {
+  paginationButtonClicked = (maxPageCnt, currentPage, button) => {
     let end;
     let start;
     if (maxPageCnt === 4) {
@@ -63,13 +57,13 @@ class Pagination {
       start = end - 5;
     }
 
-    // 초기화
+    // 버튼 클릭할 때마다 table 초기화
     document.getElementById('table').innerHTML = '';
-    this.paginationBtnsStyle(maxPageCnt, currentPage, button);
+    this.paginationButtonsStyle(maxPageCnt, currentPage, button);
     this.sliceData(start, end);
   };
 
-  paginationBtnsStyle = (maxPageCnt, currentPage, button) => {
+  paginationButtonsStyle = (maxPageCnt, currentPage, button) => {
     for (let i = 0; i < maxPageCnt; i++) {
       if (currentPage === i) {
         button[i].classList.add('active');

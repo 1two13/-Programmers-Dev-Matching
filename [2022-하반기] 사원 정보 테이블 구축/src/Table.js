@@ -1,15 +1,3 @@
-export const displayTableData = (data) => {
-  const tr = document.createElement('tr');
-
-  for (let i = 0; i < 4; i++) {
-    const td = document.createElement('td');
-    td.appendChild(document.createTextNode(Object.values(data)[i]));
-    tr.appendChild(td);
-  }
-
-  return tr;
-};
-
 class Table {
   #data;
 
@@ -20,16 +8,17 @@ class Table {
 
   render() {
     const table = document.createElement('table');
+    // 모든 자식 노드 비우기
     table.replaceChildren();
     const thead = this.displayTableHead();
     const tbody = document.createElement('tbody');
 
     for (let i = 0; i < this.#data.length; i++) {
-      let tbodyTr = displayTableData(this.#data[i]);
+      let tbodyTr = this.displayTableData(this.#data[i]);
       tbody.appendChild(tbodyTr);
     }
-    table.appendChild(tbody);
 
+    table.appendChild(tbody);
     table.appendChild(thead);
     document.getElementById('table').appendChild(table);
   }
@@ -40,13 +29,26 @@ class Table {
 
     for (let i = 0; i < 4; i++) {
       const th = document.createElement('th');
-      // table 제목
+
       th.appendChild(document.createTextNode(Object.keys(this.#data[0])[i]));
       theadTr.appendChild(th);
     }
-    thead.appendChild(theadTr);
 
+    thead.appendChild(theadTr);
     return thead;
+  };
+
+  displayTableData = (data) => {
+    const tr = document.createElement('tr');
+
+    for (let i = 0; i < 4; i++) {
+      const td = document.createElement('td');
+
+      td.appendChild(document.createTextNode(Object.values(data)[i]));
+      tr.appendChild(td);
+    }
+
+    return tr;
   };
 }
 

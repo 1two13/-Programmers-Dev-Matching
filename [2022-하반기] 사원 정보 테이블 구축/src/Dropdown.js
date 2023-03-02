@@ -14,6 +14,7 @@ class Dropdown {
   render() {
     const select = document.createElement('select');
     select.setAttribute('id', 'cntPerPage');
+
     for (let i in this.#options) {
       const option = document.createElement('option');
       option.setAttribute('value', this.#options[i]);
@@ -26,11 +27,13 @@ class Dropdown {
       let pagePerCnt = Number(event.target.value);
       let maxPageCnt = pagePerCnt === 15 ? 4 : 7;
       let currentPage = 1;
-      // 초기화
+
+      // select 클릭할 때마다 pagination과 table 초기화
       document.getElementById('pagination').innerHTML = '';
       document.getElementById('table').innerHTML = '';
+      // 새로운 데이터 화면에 그리기
       new Table(this.#data.slice(0, pagePerCnt));
-      new Pagination(this.#data).setPaginationBtns(maxPageCnt, pagePerCnt, currentPage);
+      new Pagination(this.#data).setPaginationButtons(maxPageCnt, currentPage);
     });
   }
 }
